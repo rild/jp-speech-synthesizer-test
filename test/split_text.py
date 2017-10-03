@@ -41,6 +41,7 @@ print('read: ' + fname)
 
 t = Tokenizer()
 tokens = t.tokenize(u'pythonの本を読んだ')
+out = ''
 with open(fname, encoding='UTF-8') as f:  # 文字コードの指定
     for line in f:
         elements = line.rstrip().split('\t')  # カンマ区切りの場合
@@ -48,6 +49,17 @@ with open(fname, encoding='UTF-8') as f:  # 文字コードの指定
         text = ''
         for token in tokens:
             text += str(token) + ' '
-        print(text)
+        # print(text)
+        out += text + '\n'
         # for element in elements:
         #     print(element.encode('utf-8'))
+
+if len(sys.argv) != 3:
+    exit(0)
+
+fname = sys.argv[2]
+print('write: ' + fname)
+with open(fname, 'w') as f:
+    f.write(out)
+
+print('finish')
